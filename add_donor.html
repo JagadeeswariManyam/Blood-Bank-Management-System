@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Add Donor</h2>
+<form method="POST">
+    <div class="mb-3">
+        <label>Donor Name</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Blood Group</label>
+        <select name="blood_group" class="form-control" required>
+            <option value="">--Select--</option>
+            <option>A+</option><option>A-</option>
+            <option>B+</option><option>B-</option>
+            <option>O+</option><option>O-</option>
+            <option>AB+</option><option>AB-</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Contact</label>
+        <input type="text" name="contact" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label>Last Donation Date</label>
+        <input type="date" name="last_donation" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-danger">Add Donor</button>
+</form>
+{% endblock %}

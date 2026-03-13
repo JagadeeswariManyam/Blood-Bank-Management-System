@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Blood Requests</h2>
+<table class="table table-bordered table-striped">
+    <thead class="table-danger">
+        <tr>
+            <th>ID</th>
+            <th>Hospital</th>
+            <th>Patient</th>
+            <th>Blood Group</th>
+            <th>Units</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for req in requests %}
+        <tr>
+            <td>{{ req.request_id }}</td>
+            <td>{{ req.hospital_name }}</td>
+            <td>{{ req.patient_name }}</td>
+            <td>{{ req.blood_group }}</td>
+            <td>{{ req.units_required }}</td>
+            <td>{{ req.request_date }}</td>
+            <td>
+                {% if req.status == 'Approved' %}
+                    <span class="badge bg-success">Approved</span>
+                {% else %}
+                    <span class="badge bg-warning text-dark">Pending</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if req.status != 'Approved' and session.get('admin') %}
+                <form method="POST" style="display:inline">
+                    <input type="hidden" name="approve_id" value="{{ req.request_id }}"/>
+                    <button class="btn btn-sm btn-success">Approve</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
